@@ -1,0 +1,9 @@
+version: '3'
+services:
+  node1:
+    build: .
+    command: bash -c "while true; do sleep 10000; done"
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ./:/project:rw
