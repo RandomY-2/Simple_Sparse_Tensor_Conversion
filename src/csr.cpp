@@ -38,6 +38,20 @@ void coo_to_csr(
     }
 }
 
+void traverse_csr(
+    const std::vector<int>& csr_row_ptr,
+    const std::vector<int>& csr_col_ind,
+    const std::vector<double>& csr_values
+) {
+    for (size_t i = 0; i < csr_row_ptr.size() - 1; i++) {
+        int r = i, c_start = csr_row_ptr[i], c_end = csr_row_ptr[i + 1];
+
+        for (int j = c_start; j < c_end; j++) {
+            std::cout << r << " " << csr_col_ind[j] << " " << csr_values[j] << std::endl;
+        }
+    }
+}
+
 int main() {
     int n_dim = -1;
     std::vector<int> dims;
@@ -63,4 +77,7 @@ int main() {
     std::cout << "\nCSR Values: ";
     for (double v : csr_values) std::cout << v << " ";
     std::cout << std::endl;
+
+    std::cout << "Traverse CSR: " << std::endl;
+    traverse_csr(csr_row_ptr, csr_col_ind, csr_values);
 }
